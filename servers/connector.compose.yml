@@ -3,6 +3,7 @@ services:
   connector:
     image: ghcr.io/8xff/atm0s-media-server:master
     network_mode: "host"
+    privileged: true
     command: ["connector", "--mq-uri", "nats://nats:4222"]
     labels:
       - "com.centurylinklabs.watchtower.enable=true"

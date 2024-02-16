@@ -3,6 +3,7 @@ services:
   gateway:
     image: ghcr.io/8xff/atm0s-media-server:master
     network_mode: "host"
+    privileged: true
     command: ["gateway"]
     labels:
       - "com.centurylinklabs.watchtower.enable=true"

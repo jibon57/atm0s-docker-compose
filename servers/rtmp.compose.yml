@@ -3,6 +3,7 @@ services:
   rtmp:
     image: ghcr.io/8xff/atm0s-media-server:master
     network_mode: "host"
+    privileged: true
     command: ["rtmp"]
     labels:
       - "com.centurylinklabs.watchtower.enable=true"

@@ -3,6 +3,7 @@ services:
   webrtc:
     image: ghcr.io/8xff/atm0s-media-server:master
     network_mode: "host"
+    privileged: true
     command: ["webrtc"]
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
