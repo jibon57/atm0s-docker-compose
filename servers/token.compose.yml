@@ -1,0 +1,17 @@
+version: '3'
+services:
+  token:
+    image: ghcr.io/8xff/atm0s-media-server:master
+    command: ["token-generator", "--http-port", "4000"]
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    env_file:
+      - ../env/token.env
+    ports:
+      - 4000:4000
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_LABEL_ENABLE=true

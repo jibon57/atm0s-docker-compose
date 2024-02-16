@@ -1,0 +1,53 @@
+services:
+  connector:
+    image: ghcr.io/8xff/atm0s-media-server:master
+    network_mode: "host"
+    command: ["connector", "--mq-uri", "nats://nats:4222"]
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    env_file:
+      - ./connector.env
+  nats:
+    hostname: nats
+    image: nats:2.6.0
+  gateway:
+    image: ghcr.io/8xff/atm0s-media-server:master
+    network_mode: "host"
+    command: ["gateway"]
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    env_file:
+      - ./gateway.env
+  rtmp:
+    image: ghcr.io/8xff/atm0s-media-server:master
+    network_mode: "host"
+    command: ["rtmp"]
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    env_file:
+      - ./rtmp.env
+  token:
+    image: ghcr.io/8xff/atm0s-media-server:master
+    command: ["token-generator", "--http-port", "4000"]
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    env_file:
+      - ./token.env
+    ports:
+      - 4000:4000
+  webrtc:
+    image: ghcr.io/8xff/atm0s-media-server:master
+    network_mode: "host"
+    command: ["webrtc"]
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    env_file:
+      - ./webrtc.env
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_LABEL_ENABLE=true
+version: '3'
+

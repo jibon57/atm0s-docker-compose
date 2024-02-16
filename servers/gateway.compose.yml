@@ -1,0 +1,16 @@
+version: '3'
+services:
+  gateway:
+    image: ghcr.io/8xff/atm0s-media-server:master
+    network_mode: "host"
+    command: ["gateway"]
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    env_file:
+      - ../env/gateway.env
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_LABEL_ENABLE=true
