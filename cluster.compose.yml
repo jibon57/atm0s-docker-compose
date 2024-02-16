@@ -6,7 +6,7 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     env_file:
-      - ./connector.env
+      - ./env/connector.env
   nats:
     hostname: nats
     image: nats:2.6.0
@@ -17,7 +17,7 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     env_file:
-      - ./gateway.env
+      - ./env/gateway.env
   rtmp:
     image: ghcr.io/8xff/atm0s-media-server:master
     network_mode: "host"
@@ -25,14 +25,14 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     env_file:
-      - ./rtmp.env
+      - ./env/rtmp.env
   token:
     image: ghcr.io/8xff/atm0s-media-server:master
     command: ["token-generator", "--http-port", "4000"]
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     env_file:
-      - ./token.env
+      - ./env/token.env
     ports:
       - 4000:4000
   webrtc:
@@ -42,7 +42,7 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     env_file:
-      - ./webrtc.env
+      - ./env/webrtc.env
   watchtower:
     image: containrrr/watchtower
     volumes:
