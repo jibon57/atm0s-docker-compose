@@ -1,10 +1,28 @@
 # Atm0s Docker Compose
-Start a cluster:
+
+## Usage
+Clone this project
+```bash
+git clone https://github.com/luongngocminh/atm0s-docker-compose.git 
+cd atm0s-docker-compose
 ```
-docker compose -f cluster.compose.yml up -d
+
+Start a cluster:
+```bash
+docker compose --profile cluster up -d
+```
+
+By default the cluster profile won't include the connector server, to start a cluster with connector:
+```bash
+docker compose --profile cluster --profile connector up -d
 ```
 
 Start a single server:
+```bash
+docker compose --profile <server> up -d
 ```
-docker compose -f servers/<server>.compose.yml up -d
+
+You can also provide a seed by:
+```bash
+docker compose --profile <server> up -e SEEDS=<YOUR_SEED> -d
 ```

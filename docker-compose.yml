@@ -4,17 +4,20 @@ services:
     network_mode: "host"
     command: ["connector", "--mq-uri", "nats://nats:4222"]
     privileged: true
+    profiles: [connector]
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     env_file:
       - ./env/connector.env
   nats:
+    profiles: [connector]
     hostname: nats
     image: nats:2.6.0
   gateway:
     image: ghcr.io/8xff/atm0s-media-server:master
     network_mode: "host"
     privileged: true
+    profiles: [gateway, cluster]
     command: ["gateway"]
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -25,6 +28,7 @@ services:
     network_mode: "host"
     privileged: true
     command: ["rtmp"]
+    profiles: [rtmp, cluster]
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     env_file:
@@ -32,6 +36,7 @@ services:
   token:
     image: ghcr.io/8xff/atm0s-media-server:master
     command: ["token-generate", "--http-port", "5000"]
+    profiles: [token, cluster]
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     env_file:
@@ -41,6 +46,7 @@ services:
   webrtc:
     image: ghcr.io/8xff/atm0s-media-server:master
     network_mode: "host"
+    profiles: [webrtc, cluster]
     privileged: true
     command: ["webrtc"]
     labels:
