@@ -22,7 +22,7 @@ Start a single server:
 docker compose --profile <server> up -d
 ```
 
-You can also provide a seed by:
-```bash
-docker compose --profile <server> up -e SEEDS=<YOUR_SEED> -d
+You can also provide a seed by modifying the `env/shared.env` file before running `docker compose`:
+```env
+SEEDS=0@/ip4/127.0.0.1/udp/4000/ip4/127.0.0.1/tcp/4000
 ```
