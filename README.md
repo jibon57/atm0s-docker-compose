@@ -22,7 +22,9 @@ Start a single server:
 docker compose --profile <server> up -d
 ```
 
-You can also provide a seed by modifying the `env/shared.env` file before running `docker compose`:
-```env
+You can also provide a seed for the cluster by modifying the `env/gateway.env` file before running `docker compose`:
+```
 SEEDS=0@/ip4/127.0.0.1/udp/4000/ip4/127.0.0.1/tcp/4000
 ```
+Each service will have an env file by their name, and a `shared.env` to globally override any local config.
+By default, every service nodes will be seeding to the gateway node at localhost port 4000, if you want to customize these configs try updating the env files accordingly.
