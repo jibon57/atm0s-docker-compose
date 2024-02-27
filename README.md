@@ -3,7 +3,7 @@
 ## Usage
 Clone this project
 ```bash
-git clone https://github.com/luongngocminh/atm0s-docker-compose.git 
+git clone https://github.com/8xFF/atm0s-docker-compose.git 
 cd atm0s-docker-compose
 ```
 
