@@ -24,7 +24,7 @@ services:
     - ./env/gateway.env
     - ./env/shared.env
    healthcheck:
-    test: curl --fail http://localhost:3001/ui || exit 1
+    test: curl --fail http://localhost:3001/token/ui || exit 1
     interval: 20s
     timeout: 1s
     retries: 5
